@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 17:09:20 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 11:41:11 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/15 12:08:56 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int
 }
 
 void
-	mandelbrot(t_data *data, int x, int y, t_boundary boundary)
+	mandelbrot(t_data *data, t_res res, t_boundary boundary)
 {
 	int		i;
 	int		j;
@@ -50,26 +50,22 @@ void
 	float	a;
 	float	b;
 	int		depth;
-	int		gradient_depth;
 	int		*gradient;
 
 	black = create_trgb(0, 0, 0, 0);
 	white = create_trgb(0, 255, 255, 255);
-	gradient_depth = 75;
-	gradient = create_gradient(white, gradient_depth);
+	gradient = create_gradient(white, boundary.depth);
 	if (!gradient)
 		return ; //malloc failed
 	i = 0;
-	while (i < x)
+	while (i < res.x)
 	{
 		j = 0;
-		while (j < y)
+		while (j < res.y)
 		{
-			a = boundary.origin.r + boundary.range.r * ((float)i / (float)x);
-			b = boundary.origin.i + boundary.range.i * ((float)j / (float)y);
-			//a = -2.0 + 2.5 * ((float)i / (float)x);
-			//b = -1.0 + 2.0 * ((float)j / (float)y);
-			depth = isinset(a, b, gradient_depth);
+			a = boundary.origin.r + boundary.range.r * ((float)i / (float)res.x);
+			b = boundary.origin.i + boundary.range.i * ((float)j / (float)res.y);
+			depth = isinset(a, b, boundary.depth);
 			if (depth == -1)
 				color_pixel(data, i, j, black);
 			else

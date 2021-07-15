@@ -2,7 +2,9 @@ SRCS		=	main.c \
 				color.c \
 				color_get.c \
 				complex.c \
-				mandelbrot.c
+				mandelbrot.c \
+				zoom.c \
+				utils.c
 OBJS		= ${SRCS:.c=.o}
 CC			= clang
 #CFLAGS		= -Wall -Wextra -Werror

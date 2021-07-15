@@ -33,7 +33,16 @@ typedef struct s_boundary
 {
 	t_complex	origin;
 	t_complex	range;
+	int			depth;
 }	t_boundary;
+
+typedef struct s_res
+{
+	int	x;
+	int	y;
+}	t_res;
+
+void	init_boundary(t_boundary *boundary, t_complex center, t_complex range, int depth);
 
 void	color_pixel(t_data *data, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
@@ -46,6 +55,7 @@ int		get_b(int trgb);
 t_complex	cadd(t_complex a, t_complex b);
 t_complex	cpow2(t_complex c);
 
-void	mandelbrot(t_data *data, int x, int y, t_boundary boundary);
+void	mandelbrot(t_data *data, t_res res, t_boundary boundary);
+void	zoom(t_boundary *boundary);
 
 #endif
