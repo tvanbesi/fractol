@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 17:09:20 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 12:08:56 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/15 12:37:27 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void
 	white = create_trgb(0, 255, 255, 255);
 	gradient = create_gradient(white, boundary.depth);
 	if (!gradient)
-		return ; //malloc failed
+	{
+		perror(strerror(errno));
+		exit(-1);
+	}
 	i = 0;
 	while (i < res.x)
 	{

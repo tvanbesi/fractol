@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 11:58:30 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 12:11:30 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/15 12:57:09 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,6 @@ void
 {
 	boundary->range.r /= 2.0;
 	boundary->range.i /= 2.0;
+	boundary->origin.r = boundary->center.r - boundary->range.r / 2.0;
+	boundary->origin.i = boundary->center.i - boundary->range.i / 2.0;
 }

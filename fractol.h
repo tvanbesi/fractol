@@ -4,9 +4,13 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
-
-//REMOVE FOR DEFENCE
 # include <stdio.h>
+# include <errno.h>
+# include <string.h>
+
+# define UP		65362
+# define DOWN	65364
+# define ESC	65307
 
 typedef struct s_data
 {
@@ -16,12 +20,6 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }	t_data;
-
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-}	t_vars;
 
 typedef struct s_complex
 {
@@ -34,6 +32,7 @@ typedef struct s_boundary
 	t_complex	origin;
 	t_complex	range;
 	int			depth;
+	t_complex	center;
 }	t_boundary;
 
 typedef struct s_res
@@ -41,6 +40,16 @@ typedef struct s_res
 	int	x;
 	int	y;
 }	t_res;
+
+typedef struct s_vars
+{
+	void		*mlx;
+	void		*mlx_win;
+	t_res		res;
+	t_data		img;
+	t_boundary	boundary;
+
+}	t_vars;
 
 void	init_boundary(t_boundary *boundary, t_complex center, t_complex range, int depth);
 
