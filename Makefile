@@ -1,5 +1,7 @@
 SRCS		=	main.c \
 				color.c \
+				color_get.c \
+				complex.c \
 				mandelbrot.c
 OBJS		= ${SRCS:.c=.o}
 CC			= clang
