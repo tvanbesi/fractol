@@ -29,6 +29,12 @@ typedef struct s_complex
 	float	i;
 }	t_complex;
 
+typedef struct s_boundary
+{
+	t_complex	origin;
+	t_complex	range;
+}	t_boundary;
+
 void	color_pixel(t_data *data, int x, int y, int color);
 int		create_trgb(int t, int r, int g, int b);
 int		*create_gradient(int color, int depth);
@@ -40,6 +46,6 @@ int		get_b(int trgb);
 t_complex	cadd(t_complex a, t_complex b);
 t_complex	cpow2(t_complex c);
 
-void	mandelbrot(t_data *data, int x, int y);
+void	mandelbrot(t_data *data, int x, int y, t_boundary boundary);
 
 #endif
