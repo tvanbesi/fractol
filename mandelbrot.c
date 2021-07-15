@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 17:09:20 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 12:37:27 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/15 13:24:44 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int
 	while (i < depth)
 	{
 		c = cadd(cpow2(c), z1);
-		if (isinf(c.r) || isinf(c.i))
+		if (c.r * c.r + c.i * c.i > 4.0)
 			return (i);
 		i++;
 	}
@@ -64,9 +64,9 @@ void
 	while (i < res.x)
 	{
 		j = 0;
+		a = boundary.origin.r + boundary.range.r * ((float)i / (float)res.x);
 		while (j < res.y)
 		{
-			a = boundary.origin.r + boundary.range.r * ((float)i / (float)res.x);
 			b = boundary.origin.i + boundary.range.i * ((float)j / (float)res.y);
 			depth = isinset(a, b, boundary.depth);
 			if (depth == -1)

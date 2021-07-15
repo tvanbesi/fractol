@@ -14,7 +14,7 @@ NAME		= fractol
 RM			= rm -f
 
 %.o :		%.c
-			${CC} ${CFLAGS} ${INC} -c -o $@ $<
+			${CC} ${CFLAGS} ${INC} -O3 -c -o $@ $<
 all :		${NAME}
 ${NAME} :	${OBJS}
 			${CC} -o ${NAME} ${OBJS} minilibX/libmlx.a -lXext -lX11 -lm

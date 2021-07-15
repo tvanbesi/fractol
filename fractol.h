@@ -65,6 +65,6 @@ t_complex	cadd(t_complex a, t_complex b);
 t_complex	cpow2(t_complex c);
 
 void	mandelbrot(t_data *data, t_res res, t_boundary boundary);
-void	zoom(t_boundary *boundary);
+void	zoom(t_boundary *boundary, float n);
 
 #endif
