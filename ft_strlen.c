@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tvanbesi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/16 12:11:45 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 20:46:10 by tvanbesi         ###   ########.fr       */
+/*   Created: 2019/11/05 12:21:50 by tvanbesi          #+#    #+#             */
+/*   Updated: 2021/07/16 19:16:28 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void
-	render(t_vars *vars)
+size_t
+	ft_strlen(const char *s)
 {
-	fractal(vars);
-	mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->img.img, 0, 0);
+	size_t	r;
+
+	r = 0;
+	while (*s++)
+		r++;
+	return (r);
 }

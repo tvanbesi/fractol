@@ -8,7 +8,13 @@ SRCS		=	main.c \
 				render.c \
 				manipulate_image.c \
 				utils.c \
-				error.c
+				hook.c \
+				error.c \
+				ft_strncmp.c \
+				ft_strlen.c \
+				ft_memcmp.c \
+				ft_isdigit.c \
+				ft_atold.c
 OBJS		= ${SRCS:.c=.o}
 CC			= clang
 #CFLAGS		= -Wall -Wextra -Werror

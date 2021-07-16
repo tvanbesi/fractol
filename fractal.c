@@ -6,14 +6,14 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 17:09:20 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 11:12:12 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/16 20:45:22 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 void
-	fractal(t_data *data, t_res res, t_boundary boundary)
+	fractal(t_vars *vars)
 {
 	int			i;
 	int			j;
@@ -21,21 +21,29 @@ void
 	long double	b;
 	int			*gradient;
 
-	gradient = create_gradient(RED, boundary.depth);
+	gradient = create_gradient(RED, vars->boundary.depth);
 	if (!gradient)
 		exit_error();
 	i = -1;
-	while (++i < res.x)
+	while (++i < vars->res.x)
 	{
 		j = -1;
-		a = boundary.origin.r + boundary.range.r
-			* ((long double)i / (long double)res.x);
-		while (++j < res.y)
+		a = vars->boundary.origin.r + vars->boundary.range.r
+			* ((long double)i / (long double)vars->res.x);
+		while (++j < vars->res.y)
 		{
-			b = boundary.origin.i + boundary.range.i
-				* ((long double)j / (long double)res.y);
-			color_by_depth(mandelbrot(a, b, boundary.depth),
-				data, (t_pos){i, j}, gradient);
+			b = vars->boundary.origin.i + vars->boundary.range.i
+				* ((long double)j / (long double)vars->res.y);
+			if (vars->fractal.type == MANDELBROT)
+			{
+				color_by_depth(mandelbrot(a, b, vars->boundary.depth),
+						&vars->img, (t_pos){i, j}, gradient);
+			}
+			else if (vars->fractal.type == JULIA)
+			{
+				color_by_depth(julia(a, b, vars->boundary.depth,
+						vars->fractal.c), &vars->img, (t_pos){i, j}, gradient);
+			}
 		}
 	}
 	free(gradient);

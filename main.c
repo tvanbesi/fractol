@@ -6,49 +6,58 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:06:14 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 12:45:28 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/16 21:15:08 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int
-	close(t_vars *vars)
+static void
+	init_vars(t_vars *vars)
 {
-	mlx_destroy_image(vars->mlx, vars->img.img);
-	mlx_destroy_window(vars->mlx, vars->mlx_win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	exit(0);
+	vars->mlx = mlx_init();
+	vars->res = (t_res){800, 800};
+	vars->mlx_win = mlx_new_window(vars->mlx,
+			vars->res.x, vars->res.y, "fractol");
+	vars->img.img = mlx_new_image(vars->mlx, vars->res.x, vars->res.y);
+	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
+			&vars->img.line_length, &vars->img.endian);
 }
 
 static int
-	key_hook(int keycode, t_vars *vars)
+	sanity_check(const char *arg)
 {
-	if (keycode == RIGHT)
-		translate(&vars->boundary, RIGHT, vars);
-	else if (keycode == LEFT)
-		translate(&vars->boundary, LEFT, vars);
-	else if (keycode == UP)
-		translate(&vars->boundary, UP, vars);
-	else if (keycode == DOWN)
-		translate(&vars->boundary, DOWN, vars);
-	else if (keycode == PLUS)
-		change_iter_n(&vars->boundary, 2.0, vars);
-	else if (keycode == MINUS)
-		change_iter_n(&vars->boundary, 0.5, vars);
-	else if (keycode == ESC)
-		close(vars);
-	return (0);
+	if (*arg == '-')
+		arg++;
+	while (ft_isdigit(*arg))
+		arg++;
+	if (*arg == '.')
+		arg++;
+	while (ft_isdigit(*arg))
+		arg++;
+	if (*arg)
+		return (0);
+	return (1);
 }
 
 static int
-	mouse_hook(int button, int x, int y, t_vars *vars)
+	parse_arg(int argc, char **argv, t_fractal *fractal)
 {
-	if (button == SCROLL_UP)
-		zoom(&vars->boundary, 0.5, vars);
-	else if (button == SCROLL_DOWN)
-		zoom(&vars->boundary, 2.0, vars);
+	if (argc == 1)
+		return (-1);
+	if (!ft_strncmp(argv[1], "mandelbrot", 11))
+	{
+		fractal->type = MANDELBROT;
+		return (0);
+	}
+	else if (!ft_strncmp(argv[1], "julia", 6))
+		fractal->type = JULIA;
+	if (fractal->type == JULIA && argc < 4)
+		return (-1);
+	if (!sanity_check(argv[2]) || !sanity_check(argv[3]))
+		return (-1);
+	if (fractal->type == JULIA)
+		fractal->c = (t_complex){ft_atold(argv[2]), ft_atold(argv[3])};
 	return (0);
 }
 
@@ -57,17 +66,16 @@ int
 {
 	t_vars		vars;
 
-	vars.mlx = mlx_init();
-	vars.res = (t_res){800, 800};
-	vars.mlx_win = mlx_new_window(vars.mlx, vars.res.x, vars.res.y, "fractol");
-	vars.img.img = mlx_new_image(vars.mlx, vars.res.x, vars.res.y);
-	vars.img.addr = mlx_get_data_addr(vars.img.img,
-			&vars.img.bits_per_pixel, &vars.img.line_length, &vars.img.endian);
+	if (parse_arg(argc, argv, &vars.fractal) == -1)
+		exit_bad_arg();
+	printf("%Lf+%Lf\n", vars.fractal.c.r, vars.fractal.c.i);
+	init_vars(&vars);
 	init_boundary(&vars.boundary,
-		(t_complex){-0.745428, 0.113009}, (t_complex){5.0, 5.0}, 64);
+		(t_complex){0.0, 0.0}, (t_complex){5.0, 5.0}, 64);
 	render(&vars);
 	mlx_key_hook(vars.mlx_win, key_hook, &vars);
 	mlx_mouse_hook(vars.mlx_win, mouse_hook, &vars);
-	mlx_hook(vars.mlx_win, 17, 0, close, &vars);
+	mlx_hook(vars.mlx_win, 19, 1L << 17, refresh, &vars);
+	mlx_hook(vars.mlx_win, 17, 0, close_hook, &vars);
 	mlx_loop(vars.mlx);
 }

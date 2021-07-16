@@ -8,6 +8,9 @@
 # include <errno.h>
 # include <string.h>
 
+//REMOVE FOR DEFENCE
+# include <unistd.h>
+
 # define LEFT			65361
 # define UP				65362
 # define RIGHT			65363
@@ -23,6 +26,12 @@
 # define RED			0x00FF0000
 # define GREEN			0x0000FF00
 # define BLUE			0x000000FF
+
+typedef enum e_fractal_type
+{
+	MANDELBROT,
+	JULIA
+}	t_fractal_type;
 
 typedef struct s_data
 {
@@ -59,6 +68,12 @@ typedef struct s_pos
 	int	y;
 }	t_pos;
 
+typedef struct s_fractal
+{
+	int			type;
+	t_complex	c;
+}	t_fractal;
+
 typedef struct s_vars
 {
 	void		*mlx;
@@ -66,6 +81,7 @@ typedef struct s_vars
 	t_res		res;
 	t_data		img;
 	t_boundary	boundary;
+	t_fractal	fractal;
 
 }	t_vars;
 
@@ -84,7 +100,12 @@ int			get_b(int trgb);
 t_complex	cadd(t_complex a, t_complex b);
 t_complex	cpow2(t_complex c);
 
-void		fractal(t_data *data, t_res res, t_boundary boundary);
+int			close_hook(t_vars *vars);
+int			refresh(t_vars *vars);
+int			key_hook(int keycode, t_vars *vars);
+int			mouse_hook(int button, int x, int y, t_vars *vars);
+
+void		fractal(t_vars *vars);
 int			mandelbrot(long double a, long double b, int depth);
 int			julia(long double a, long double b, int depth, t_complex c);
 void		zoom(t_boundary *boundary, long double n, t_vars *vars);
@@ -94,5 +115,12 @@ void		change_iter_n(t_boundary *boundary, float p, t_vars *vars);
 void		render(t_vars *vars);
 
 void		exit_error(void);
+void		exit_bad_arg(void);
+
+size_t		ft_strlen(const char *s);
+int			ft_memcmp(const void *s1, const void *s2, size_t n);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_isdigit(int c);
+long double	ft_atold(const char *s);
 
 #endif

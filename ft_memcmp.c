@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tvanbesi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/16 12:11:45 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 20:46:10 by tvanbesi         ###   ########.fr       */
+/*   Created: 2019/11/05 11:58:08 by tvanbesi          #+#    #+#             */
+/*   Updated: 2021/07/16 19:16:18 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void
-	render(t_vars *vars)
+int
+	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	fractal(vars);
-	mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->img.img, 0, 0);
+	unsigned const char	*cs1;
+	unsigned const char	*cs2;
+
+	cs1 = s1;
+	cs2 = s2;
+	while (n-- > 0)
+	{
+		if (*cs1 != *cs2)
+			return (*cs1 - *cs2);
+		cs1++;
+		cs2++;
+	}
+	return (0);
 }

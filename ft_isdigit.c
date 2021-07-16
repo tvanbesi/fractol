@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tvanbesi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/16 12:11:45 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 20:46:10 by tvanbesi         ###   ########.fr       */
+/*   Created: 2019/11/05 15:08:30 by tvanbesi          #+#    #+#             */
+/*   Updated: 2019/11/07 16:58:23 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
-
-void
-	render(t_vars *vars)
+int
+	ft_isdigit(int c)
 {
-	fractal(vars);
-	mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->img.img, 0, 0);
+	return (c >= '0' && c <= '9');
 }
