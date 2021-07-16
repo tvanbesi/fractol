@@ -6,21 +6,14 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 17:09:20 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 13:24:44 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/16 10:32:30 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/**
-**
-**	Return -1 if in set
-**	return depth otherwise
-**
-**/
-
 static int
-	isinset(float a, float b, int depth)
+	get_depth(long double a, long double b, int depth)
 {
 	t_complex	c;
 	t_complex	z1;
@@ -43,18 +36,14 @@ static int
 void
 	mandelbrot(t_data *data, t_res res, t_boundary boundary)
 {
-	int		i;
-	int		j;
-	int		black;
-	int		white;
-	float	a;
-	float	b;
-	int		depth;
-	int		*gradient;
+	int			i;
+	int			j;
+	long double	a;
+	long double	b;
+	int			depth;
+	int			*gradient;
 
-	black = create_trgb(0, 0, 0, 0);
-	white = create_trgb(0, 255, 255, 255);
-	gradient = create_gradient(white, boundary.depth);
+	gradient = create_gradient(RED, boundary.depth);
 	if (!gradient)
 	{
 		perror(strerror(errno));
@@ -64,15 +53,16 @@ void
 	while (i < res.x)
 	{
 		j = 0;
-		a = boundary.origin.r + boundary.range.r * ((float)i / (float)res.x);
+		a = boundary.origin.r + boundary.range.r * ((long double)i / (long double)res.x);
 		while (j < res.y)
 		{
-			b = boundary.origin.i + boundary.range.i * ((float)j / (float)res.y);
-			depth = isinset(a, b, boundary.depth);
-			if (depth == -1)
-				color_pixel(data, i, j, black);
-			else
-				color_pixel(data, i, j, gradient[depth]);
+			b = boundary.origin.i + boundary.range.i * ((long double)j / (long double)res.y);
+			color_by_depth(get_depth(a, b, boundary.depth), data, (t_pos){i, j}, gradient);
+//			depth = isinset(a, b, boundary.depth);
+//			if (depth == -1)
+//				color_pixel(data, i, j, BLACK);
+//			else
+//				color_pixel(data, i, j, gradient[depth]);
 			j++;
 		}
 		i++;

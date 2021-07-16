@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:11:44 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 10:45:21 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/16 10:34:02 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ int
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+void
+	color_by_depth(int depth, t_data *data, t_pos pos, int *gradient)
+{
+	if (depth == -1)
+		color_pixel(data, pos.x, pos.y, BLACK);
+	else
+		color_pixel(data, pos.x, pos.y, gradient[depth]);
+}
+
 int
 	*create_gradient(int color, int depth)
 {
@@ -40,17 +49,12 @@ int
 	while (i < depth)
 	{
 		gradient[i] = create_trgb(0,
-		(get_r(color) >> 16) * ((float)i / (float)depth),
-		(get_g(color) >> 8) * ((float)i / (float)depth),
-		get_b(color) * ((float)i / (float)depth));
-	//	gradient[i] = get_r(color) * ((float)i / (float)depth)
-	//	+ get_g(color) * ((float)i / (float)depth)
-	//	+ get_b(color) * ((float)i / (float)depth);
-	//DONT DELETE : BEAUTIFUL BUG
-	//	gradient[i] = create_trgb(0,
-	//	get_r(color) * ((float)i / (float)depth),
-	//	get_g(color) * ((float)i / (float)depth),
-	//	get_b(color) * ((float)i / (float)depth));
+				(get_r(color) >> 16) + ((255.0
+						- (get_r(color) >> 16)) * ((float)i / (float)depth)),
+				(get_g(color) >> 8) + ((255.0
+						- (get_g(color) >> 8)) * ((float)i / (float)depth)),
+				get_b(color) + ((255.0
+						- get_b(color)) * ((float)i / (float)depth)));
 		i++;
 	}
 	return (gradient);

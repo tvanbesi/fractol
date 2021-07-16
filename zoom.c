@@ -6,14 +6,14 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 11:58:30 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 13:24:39 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/16 09:04:47 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 void
-	zoom(t_boundary *boundary, float n)
+	zoom(t_boundary *boundary, long double n)
 {
 	boundary->range.r *= n;
 	boundary->range.i *= n;

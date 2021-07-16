@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:06:14 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/15 13:30:50 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/16 09:52:17 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ int
 {
 	if (keycode == UP)
 	{
-		zoom(&vars->boundary, 0.2);
+		zoom(&vars->boundary, 0.5);
 		mandelbrot(&vars->img, vars->res, vars->boundary);
 		mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->img.img, 0, 0);
+		printf("zoomed up to %.3Le\t%.3Le\n", vars->boundary.range.r, vars->boundary.range.i);
 	}
 	if (keycode == DOWN)
 	{
-		zoom(&vars->boundary, 2.0);
+		zoom(&vars->boundary, 1.5);
 		mandelbrot(&vars->img, vars->res, vars->boundary);
 		mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->img.img, 0, 0);
 	}
