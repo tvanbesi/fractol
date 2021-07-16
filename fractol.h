@@ -8,15 +8,21 @@
 # include <errno.h>
 # include <string.h>
 
-# define UP		65362
-# define DOWN	65364
-# define ESC	65307
+# define LEFT			65361
+# define UP				65362
+# define RIGHT			65363
+# define DOWN			65364
+# define PLUS			65451
+# define MINUS			65453
+# define ESC			65307
+# define SCROLL_UP		4
+# define SCROLL_DOWN	5
 
-# define WHITE	0x00FFFFFF
-# define BLACK	0x00000000
-# define RED	0x00FF0000
-# define GREEN	0x0000FF00
-# define BLUE	0x000000FF
+# define WHITE			0x00FFFFFF
+# define BLACK			0x00000000
+# define RED			0x00FF0000
+# define GREEN			0x0000FF00
+# define BLUE			0x000000FF
 
 typedef struct s_data
 {
@@ -50,7 +56,7 @@ typedef struct s_res
 typedef struct s_pos
 {
 	int	x;
-	int y;
+	int	y;
 }	t_pos;
 
 typedef struct s_vars
@@ -78,7 +84,15 @@ int			get_b(int trgb);
 t_complex	cadd(t_complex a, t_complex b);
 t_complex	cpow2(t_complex c);
 
-void		mandelbrot(t_data *data, t_res res, t_boundary boundary);
-void		zoom(t_boundary *boundary, long double n);
+void		fractal(t_data *data, t_res res, t_boundary boundary);
+int			mandelbrot(long double a, long double b, int depth);
+int			julia(long double a, long double b, int depth, t_complex c);
+void		zoom(t_boundary *boundary, long double n, t_vars *vars);
+void		translate(t_boundary *boundary, int move, t_vars *vars);
+void		change_iter_n(t_boundary *boundary, float p, t_vars *vars);
+
+void		render(t_vars *vars);
+
+void		exit_error(void);
 
 #endif

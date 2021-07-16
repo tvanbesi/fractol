@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 12:05:51 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 10:38:35 by tvanbesi         ###   ########.fr       */
+/*   Created: 2021/07/16 10:36:31 by tvanbesi          #+#    #+#             */
+/*   Updated: 2021/07/16 10:37:03 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 void
-	init_boundary(t_boundary *boundary, t_complex center,
-	t_complex range, int depth)
+	exit_error(void)
 {
-	boundary->center = center;
-	boundary->origin.r = center.r - range.r / 2.0;
-	boundary->origin.i = center.i - range.i / 2.0;
-	boundary->range = range;
-	boundary->depth = depth;
+	perror(strerror(errno));
+	exit(-1);
 }

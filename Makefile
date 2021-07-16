@@ -2,9 +2,13 @@ SRCS		=	main.c \
 				color.c \
 				color_get.c \
 				complex.c \
+				fractal.c \
 				mandelbrot.c \
-				zoom.c \
-				utils.c
+				julia.c \
+				render.c \
+				manipulate_image.c \
+				utils.c \
+				error.c
 OBJS		= ${SRCS:.c=.o}
 CC			= clang
 #CFLAGS		= -Wall -Wextra -Werror
