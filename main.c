@@ -6,13 +6,23 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:06:14 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 12:22:35 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/16 12:45:28 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int
+static int
+	close(t_vars *vars)
+{
+	mlx_destroy_image(vars->mlx, vars->img.img);
+	mlx_destroy_window(vars->mlx, vars->mlx_win);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+	exit(0);
+}
+
+static int
 	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == RIGHT)
@@ -27,15 +37,19 @@ int
 		change_iter_n(&vars->boundary, 2.0, vars);
 	else if (keycode == MINUS)
 		change_iter_n(&vars->boundary, 0.5, vars);
+	else if (keycode == ESC)
+		close(vars);
+	return (0);
 }
 
-int
+static int
 	mouse_hook(int button, int x, int y, t_vars *vars)
 {
 	if (button == SCROLL_UP)
 		zoom(&vars->boundary, 0.5, vars);
 	else if (button == SCROLL_DOWN)
 		zoom(&vars->boundary, 2.0, vars);
+	return (0);
 }
 
 int
@@ -54,5 +68,6 @@ int
 	render(&vars);
 	mlx_key_hook(vars.mlx_win, key_hook, &vars);
 	mlx_mouse_hook(vars.mlx_win, mouse_hook, &vars);
+	mlx_hook(vars.mlx_win, 17, 0, close, &vars);
 	mlx_loop(vars.mlx);
 }
