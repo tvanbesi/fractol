@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 15:14:25 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 18:21:04 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/17 10:33:23 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int
 {
 	mlx_destroy_image(vars->mlx, vars->img.img);
 	mlx_destroy_window(vars->mlx, vars->mlx_win);
-	//mlx_destroy_display(vars->mlx);
-	//free(vars->mlx);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
 	exit(0);
 }
 
@@ -52,6 +52,8 @@ int
 int
 	mouse_hook(int button, int x, int y, t_vars *vars)
 {
+	(void)x;
+	(void)y;
 	if (button == SCROLL_UP)
 		zoom(&vars->boundary, 0.5, vars);
 	else if (button == SCROLL_DOWN)

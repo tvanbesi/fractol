@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:06:14 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/16 21:15:08 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/17 10:28:11 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,9 @@ int
 
 	if (parse_arg(argc, argv, &vars.fractal) == -1)
 		exit_bad_arg();
-	printf("%Lf+%Lf\n", vars.fractal.c.r, vars.fractal.c.i);
 	init_vars(&vars);
 	init_boundary(&vars.boundary,
-		(t_complex){0.0, 0.0}, (t_complex){5.0, 5.0}, 64);
+		(t_complex){0.0, 0.0}, (t_complex){5.0, 5.0}, 32);
 	render(&vars);
 	mlx_key_hook(vars.mlx_win, key_hook, &vars);
 	mlx_mouse_hook(vars.mlx_win, mouse_hook, &vars);

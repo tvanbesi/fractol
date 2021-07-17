@@ -17,8 +17,7 @@ SRCS		=	main.c \
 				ft_atold.c
 OBJS		= ${SRCS:.c=.o}
 CC			= clang
-#CFLAGS		= -Wall -Wextra -Werror
-CFLAGS		=
+CFLAGS		= -Wall -Wextra -Werror
 INC			= -IminilibX
 NAME		= fractol
 RM			= rm -f

@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 17:09:20 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/17 09:26:42 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/17 10:27:27 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void
 	t_complex	c;
 	int			*gradient;
 
-	gradient = create_gradient(RED, vars->boundary.depth);
+	gradient = create_gradient(GREEN, vars->boundary.depth);
 	if (!gradient)
 		exit_error();
 	i = -1;
