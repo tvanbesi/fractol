@@ -24,7 +24,9 @@ RM			= rm -f
 
 %.o :		%.c
 			${CC} ${CFLAGS} ${INC} -O3 -c -o $@ $<
-all :		${NAME}
+all :
+			cd minilibX && make
+			make ${NAME}
 ${NAME} :	${OBJS}
 			${CC} -o ${NAME} ${OBJS} minilibX/libmlx.a -lXext -lX11 -lm
 clean :

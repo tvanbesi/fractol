@@ -1,2 +1,7 @@
 *.o
 fractol
+minilibX/Makefile.gen
+minilibX/libmlx.a
+minilibX/libmlx_Linux.a
+minilibX/test/Makefile.gen
+minilibX/test/mlx-test
