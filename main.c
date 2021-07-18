@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:06:14 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/18 16:46:13 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/18 16:48:58 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int
 {
 	if (*arg == '-')
 		arg++;
+	if (!ft_isdigit(*arg))
+		return (0);
 	while (ft_isdigit(*arg))
 		arg++;
 	if (*arg == '.')
