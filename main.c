@@ -6,7 +6,7 @@
 /*   By: tvanbesi <tvanbesi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 16:06:14 by tvanbesi          #+#    #+#             */
-/*   Updated: 2021/07/17 10:28:11 by tvanbesi         ###   ########.fr       */
+/*   Updated: 2021/07/18 16:46:13 by tvanbesi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int
 	}
 	else if (!ft_strncmp(argv[1], "julia", 6))
 		fractal->type = JULIA;
+	else
+		return (-1);
 	if (fractal->type == JULIA && argc < 4)
 		return (-1);
 	if (!sanity_check(argv[2]) || !sanity_check(argv[3]))
