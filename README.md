@@ -8,4 +8,4 @@ Arrow keys are used to move around the fractal. Plus and minus are used to incre
 
 Beware the higher the precision the slower the program, be patient. Also since double have a finite precision if you zoom enough the image will inevitably become pixellated.
 
-This program can render the Mandelbrot set and the Julia set.
+This program can render the Mandelbrot set and the Julia set. Look at the wikipedia page of the Julia set for example values of c.
