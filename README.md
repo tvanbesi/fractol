@@ -1,7 +1,9 @@
 # fractol
 
 This is a fractal renderer made in C as a school project.
-The code compiles on linux and Mac.
+The code compiles on Linux.
+You might need to install the `libbsd-dev` and `libxext-dev` packages so that the code compiles.
+This is because we had to use the minilibX for this project, a graphical library made by the school.
 `make` then `./fractol` to display the manual.
 
 Arrow keys are used to move around the fractal. Plus and minus are used to increase or decrease precision. The mouse wheel is used to zoom and dezoom.
